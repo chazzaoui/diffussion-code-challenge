@@ -8,6 +8,7 @@ import {
   Stack,
   Badge,
   GridItem,
+  HStack,
 } from '@chakra-ui/react';
 import { Recipe } from '@/types';
 
@@ -60,7 +61,7 @@ const RecipeCard: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
           <Text mt="2">{recipe.description}</Text>
         </Box>
 
-        <Stack mt="3" spacing={4} p="6" bg="gray.50">
+        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
           <Box>
             <Text fontWeight="bold">Protein</Text>
             <Text fontSize="sm">{recipe.protein}</Text>
@@ -69,10 +70,18 @@ const RecipeCard: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
             <Text fontWeight="bold">Spice Level</Text>
             <Text fontSize="sm">{recipe.spice}</Text>
           </Box>
+        </HStack>
+        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
+          <Box>
+            <Text fontWeight="bold">Spices</Text>
+            <Text fontSize="sm">{recipe.spice}</Text>
+          </Box>
           <Box>
             <Text fontWeight="bold">Cooking Oil</Text>
             <Text fontSize="sm">{recipe.cookingOil}</Text>
           </Box>
+        </HStack>
+        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
           <Box>
             <Text fontWeight="bold">Volume/Weight</Text>
             <Text fontSize="sm">{recipe.volume}g</Text>
@@ -81,15 +90,18 @@ const RecipeCard: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
             <Text fontWeight="bold">Serves</Text>
             <Text fontSize="sm">{recipe.serves}</Text>
           </Box>
+        </HStack>
+        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
           <Box>
             <Text fontWeight="bold">Authenticity</Text>
             <Text fontSize="sm">{recipe.authenticity}</Text>
           </Box>
+
           <Box>
             <Text fontWeight="bold">Stock</Text>
             <Text fontSize="sm">{recipe.stock}</Text>
           </Box>
-        </Stack>
+        </HStack>
       </Box>
     </GridItem>
   );
