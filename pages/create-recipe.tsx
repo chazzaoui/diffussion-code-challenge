@@ -8,8 +8,11 @@ import {
   NumberInputField,
   Button,
   Flex,
+  IconButton,
 } from '@chakra-ui/react';
 import { Recipe } from '@/types';
+import { ArrowBackIcon } from '@chakra-ui/icons';
+import { useRouter } from 'next/router';
 
 export default function CreateRecipe() {
   const {
@@ -17,6 +20,8 @@ export default function CreateRecipe() {
     register,
     formState: { errors, isSubmitting },
   } = useForm<Recipe>();
+
+  const route = useRouter();
 
   const onSubmit: SubmitHandler<Recipe> = async (values) => {
     try {
@@ -45,7 +50,14 @@ export default function CreateRecipe() {
   };
 
   return (
-    <Flex padding={4}>
+    <Flex flexDir={'column'} padding={4}>
+      <IconButton
+        aria-label="Return to home page"
+        onClick={() => route.push('/')}
+        width={24}
+      >
+        <ArrowBackIcon />
+      </IconButton>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!errors.name}>
           <FormLabel htmlFor="name">Name</FormLabel>
