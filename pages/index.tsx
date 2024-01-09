@@ -1,12 +1,22 @@
 import { Inter } from 'next/font/google';
-import { Flex, Spinner } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Grid,
+  SimpleGrid,
+  Spinner,
+} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Recipe } from '@/types';
+import RecipeCard from './components/recipeCard';
+import SearchBar from './components/searchBar';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const route = useRouter();
 
   useEffect(() => {
     fetch(
@@ -46,15 +56,25 @@ export default function Home() {
         <Spinner />
       </Flex>
     );
-  console.log({ recipes });
+
   return (
     <Flex
+      padding={4}
       alignItems={'center'}
       justifyContent={'center'}
       minH={'100vh'}
       w={'100vw'}
+      flexDir={'column'}
     >
-      <p>Hey</p>
+      <SearchBar />
+      <Button mb={12} onClick={() => route.push('/create-recipe')}>
+        Create recipe
+      </Button>
+      <SimpleGrid columns={[1, 2, 3]} spacing="40px">
+        {recipes.map((recipe, index) => (
+          <RecipeCard key={index} recipe={recipe} />
+        ))}
+      </SimpleGrid>
     </Flex>
   );
 }
