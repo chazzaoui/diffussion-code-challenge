@@ -1,5 +1,6 @@
 import {
   Button,
+  Container,
   Flex,
   SimpleGrid,
   Spinner,
@@ -48,25 +49,13 @@ export default function Home() {
 
   if (isRecipeAmountLoading || isRecipesLoading)
     return (
-      <Flex
-        alignItems={'center'}
-        justifyContent={'center'}
-        minH={'100vh'}
-        w={'100vw'}
-      >
+      <Container>
         <Spinner />
-      </Flex>
+      </Container>
     );
 
   return (
-    <Flex
-      padding={4}
-      alignItems={'center'}
-      justifyContent={'center'}
-      minH={'100vh'}
-      w={'100vw'}
-      flexDir={'column'}
-    >
+    <Container>
       <SearchBar />
       <Button mb={8} onClick={() => route.push('/create-recipe')}>
         Create recipe
@@ -77,6 +66,6 @@ export default function Home() {
           <RecipeCard key={index} recipe={recipe} />
         ))}
       </SimpleGrid>
-    </Flex>
+    </Container>
   );
 }

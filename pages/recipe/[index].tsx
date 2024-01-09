@@ -1,3 +1,4 @@
+import Container from '@/components/container';
 import RecipeCard from '@/components/recipeCard';
 import { Recipe } from '@/types';
 import { Flex, Spinner } from '@chakra-ui/react';
@@ -41,25 +42,15 @@ const RecipeDetails = () => {
 
   if (isLoading)
     return (
-      <Flex
-        alignItems={'center'}
-        justifyContent={'center'}
-        minH={'100vh'}
-        w={'100vw'}
-      >
+      <Container>
         <Spinner />
-      </Flex>
+      </Container>
     );
 
   return (
-    <Flex
-      alignItems={'center'}
-      justifyContent={'center'}
-      minH={'100vh'}
-      w={'100vw'}
-    >
+    <Container>
       {recipe ? <RecipeCard recipe={recipe} /> : null}
-    </Flex>
+    </Container>
   );
 };
 

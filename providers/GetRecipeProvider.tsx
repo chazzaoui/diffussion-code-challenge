@@ -1,9 +1,13 @@
 import { Recipe } from '@/types';
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, ReactNode } from 'react';
 
 type RecipeContextType = {
   isRecipesLoading: boolean;
   recipes: Recipe[];
+};
+
+type ContainerProps = {
+  children: ReactNode;
 };
 
 export const RecipeContext = createContext<RecipeContextType>({
@@ -11,9 +15,9 @@ export const RecipeContext = createContext<RecipeContextType>({
   isRecipesLoading: false,
 });
 
-export const RecipeProvider: React.FC<
-  React.PropsWithChildren<{}>
-> = ({ children }) => {
+export const RecipeProvider: React.FC<ContainerProps> = ({
+  children,
+}) => {
   const [isRecipesLoading, setIsRecipesLoading] =
     useState<boolean>(false);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
