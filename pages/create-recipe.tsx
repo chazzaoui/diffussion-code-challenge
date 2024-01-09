@@ -56,7 +56,6 @@ export default function CreateRecipe() {
         </FormErrorMessage>
       </FormControl>
 
-      {/* Origin field */}
       <FormControl isInvalid={errors.origin}>
         <FormLabel htmlFor="origin">Origin</FormLabel>
         <Input
@@ -69,7 +68,6 @@ export default function CreateRecipe() {
         </FormErrorMessage>
       </FormControl>
 
-      {/* Description field */}
       <FormControl isInvalid={errors.description}>
         <FormLabel htmlFor="description">Description</FormLabel>
         <Input
@@ -84,7 +82,6 @@ export default function CreateRecipe() {
         </FormErrorMessage>
       </FormControl>
 
-      {/* Difficulty field */}
       <FormControl isInvalid={errors.difficulty}>
         <FormLabel htmlFor="difficulty">Difficulty</FormLabel>
         <NumberInput>
@@ -103,7 +100,6 @@ export default function CreateRecipe() {
         </FormErrorMessage>
       </FormControl>
 
-      {/* Example for protein field */}
       <FormControl isInvalid={errors.protein}>
         <FormLabel htmlFor="protein">Protein</FormLabel>
         <Input
