@@ -50,6 +50,7 @@ const RecipeDetails = () => {
         <Spinner />
       </Flex>
     );
+
   return (
     <Flex
       alignItems={'center'}

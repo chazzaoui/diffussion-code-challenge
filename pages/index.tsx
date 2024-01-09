@@ -5,46 +5,21 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { Recipe } from '@/types';
 import SearchBar from '@/components/searchBar';
 import RecipeCard from '@/components/recipeCard';
+import { RecipeContext } from '@/providers/getRecipeProvider';
 
 export default function Home() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const route = useRouter();
-
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isRecipeAmountLoading, setIsRecipeAmountLoading] =
+    useState<boolean>(true);
   const [recipesAmount, setRecipeAmount] = useState('');
+  const { recipes, isRecipesLoading } = useContext(RecipeContext);
   useEffect(() => {
-    fetch(
-      'https://master-7rqtwti-yj2le3kr2yhmu.uk-1.platformsh.site/yumazoo/recipes',
-      {
-        method: 'GET',
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setRecipes(data.message);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(
-          'There was a problem with the fetch operation:',
-          error
-        );
-        setError(error.message);
-        setIsLoading(false);
-      });
-
     fetch(
       'https://master-7rqtwti-yj2le3kr2yhmu.uk-1.platformsh.site/yumazoo/recipes/number',
       {
@@ -59,7 +34,7 @@ export default function Home() {
       })
       .then((data) => {
         setRecipeAmount(data.message);
-        setIsLoading(false);
+        setIsRecipeAmountLoading(false);
       })
       .catch((error) => {
         console.error(
@@ -67,11 +42,11 @@ export default function Home() {
           error
         );
         setError(error.message);
-        setIsLoading(false);
+        setIsRecipeAmountLoading(false);
       });
   }, []);
 
-  if (isLoading)
+  if (isRecipeAmountLoading || isRecipesLoading)
     return (
       <Flex
         alignItems={'center'}
