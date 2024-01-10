@@ -84,7 +84,7 @@ export default function CreateRecipe() {
         <Heading>Create Recipe</Heading>
       </Flex>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={!!errors.name}>
+        <FormControl mb={2} isInvalid={!!errors.name}>
           <FormLabel htmlFor="name">Name</FormLabel>
           <Input
             id="name"
@@ -97,7 +97,7 @@ export default function CreateRecipe() {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={!!errors.origin}>
+        <FormControl mb={2} isInvalid={!!errors.origin}>
           <FormLabel htmlFor="origin">Origin</FormLabel>
           <Input
             id="origin"
@@ -112,7 +112,7 @@ export default function CreateRecipe() {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={!!errors.description}>
+        <FormControl mb={2} isInvalid={!!errors.description}>
           <FormLabel htmlFor="description">Description</FormLabel>
           <Input
             id="description"
@@ -127,7 +127,7 @@ export default function CreateRecipe() {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={!!errors.difficulty}>
+        <FormControl mb={2} isInvalid={!!errors.difficulty}>
           <FormLabel htmlFor="difficulty">Difficulty</FormLabel>
           <NumberInput>
             <NumberInputField
@@ -145,7 +145,7 @@ export default function CreateRecipe() {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={!!errors.protein}>
+        <FormControl mb={2} isInvalid={!!errors.protein}>
           <FormLabel htmlFor="protein">Protein</FormLabel>
           <Input
             id="protein"
@@ -160,7 +160,7 @@ export default function CreateRecipe() {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={!!errors.produce}>
+        <FormControl mb={2} isInvalid={!!errors.produce}>
           <FormLabel htmlFor="produce">Produce</FormLabel>
           <Input
             id="produce"
@@ -174,7 +174,7 @@ export default function CreateRecipe() {
             {errors.produce && <>errors.produce.message</>}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.spice}>
+        <FormControl mb={2} isInvalid={!!errors.spice}>
           <FormLabel htmlFor="spice">Spice</FormLabel>
           <Input
             id="spice"
@@ -188,7 +188,7 @@ export default function CreateRecipe() {
             {errors.spice && <>errors.spice.message</>}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.cookingOil}>
+        <FormControl mb={2} isInvalid={!!errors.cookingOil}>
           <FormLabel htmlFor="cookingOil">Cooking Oil</FormLabel>
           <Input
             id="cookingOil"
@@ -202,7 +202,7 @@ export default function CreateRecipe() {
             {errors.cookingOil && <>errors.cookingOil.message</>}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.volume}>
+        <FormControl mb={2} isInvalid={!!errors.volume}>
           <FormLabel htmlFor="volume">Volume</FormLabel>
           <Input
             id="volume"
@@ -216,7 +216,7 @@ export default function CreateRecipe() {
             {errors.volume && <>errors.volume.message</>}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.serves}>
+        <FormControl mb={2} isInvalid={!!errors.serves}>
           <FormLabel htmlFor="serves">Serves</FormLabel>
           <Input
             id="serves"
@@ -230,7 +230,7 @@ export default function CreateRecipe() {
             {errors.serves && <>errors.serves.message</>}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.authenticity}>
+        <FormControl mb={2} isInvalid={!!errors.authenticity}>
           <FormLabel htmlFor="authenticity">Authenticity</FormLabel>
           <Input
             id="authenticity"
@@ -244,7 +244,7 @@ export default function CreateRecipe() {
             {errors.authenticity && <>errors.authenticity.message</>}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.stock}>
+        <FormControl mb={2} isInvalid={!!errors.stock}>
           <FormLabel htmlFor="stock">Stock</FormLabel>
           <Input
             id="stock"
