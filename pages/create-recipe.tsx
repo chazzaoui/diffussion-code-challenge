@@ -29,7 +29,7 @@ export default function CreateRecipe() {
   const toast = useToast();
   const route = useRouter();
   const [isPosting, setIsPosting] = useState(false);
-
+  console.log(isValid);
   const onSubmit: SubmitHandler<Recipe> = (values) => {
     setIsPosting(true);
 
@@ -264,7 +264,7 @@ export default function CreateRecipe() {
           colorScheme="teal"
           isLoading={isSubmitting || isPosting}
           type="submit"
-          disabled={!isValid}
+          isDisabled={!isValid}
         >
           Submit
         </Button>
