@@ -1,3 +1,5 @@
+declare const chrome: any;
+
 import {
   Button,
   SimpleGrid,
@@ -12,6 +14,7 @@ import SearchBar from '@/components/searchBar';
 import RecipeCard from '@/components/recipeCard';
 import { RecipeContext } from '@/providers/RecipeProvider';
 import Container from '@/components/container';
+import { isChromeExtension } from '@/utils/isChromeExtension';
 
 export default function Home() {
   const route = useRouter();
@@ -20,6 +23,7 @@ export default function Home() {
   const [recipesAmount, setRecipeAmount] = useState('');
   const { recipes, isRecipesLoading } = useContext(RecipeContext);
   const toast = useToast();
+  const runningAsExtension = isChromeExtension();
 
   useEffect(() => {
     fetch(
@@ -64,9 +68,20 @@ export default function Home() {
   return (
     <Container>
       <SearchBar />
-      <Button mb={8} onClick={() => route.push('/create-recipe')}>
-        Create recipe
-      </Button>
+      {runningAsExtension ? (
+        <Button
+          mb={8}
+          onClick={() =>
+            chrome.tabs.create({ url: 'http://localhost:3000' })
+          }
+        >
+          Open web app
+        </Button>
+      ) : (
+        <Button mb={8} onClick={() => route.push('/create-recipe')}>
+          Create recipe
+        </Button>
+      )}
       <Text mb={2}>{recipesAmount} recipes available</Text>
       <SimpleGrid columns={[1, 2, 3]} spacing="40px">
         {recipes.map((recipe, index) => (

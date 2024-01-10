@@ -1,0 +1,10 @@
+{
+  "name": "Diffusion Recipes",
+  "description": "Create some nice Diffusion based recipes",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "Diffusion recipes",
+    "default_popup": "index.html"
+  }
+}
