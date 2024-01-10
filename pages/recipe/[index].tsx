@@ -1,6 +1,12 @@
-import { Spinner } from '@chakra-ui/react';
+import {
+  IconButton,
+  Spinner,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 
 import Container from '@/components/container';
 import RecipeCard from '@/components/recipeCard';
@@ -10,8 +16,9 @@ const RecipeDetails = () => {
   const router = useRouter();
   const { index } = router.query;
   const [recipe, setRecipe] = useState<Recipe>();
+  const route = useRouter();
+  const toast = useToast();
 
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -36,7 +43,13 @@ const RecipeDetails = () => {
           'There was a problem with the fetch operation:',
           error
         );
-        setError(error.message);
+        toast({
+          title: 'Error :(',
+          description: error.message,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
         setIsLoading(false);
       });
   }, []);
@@ -48,9 +61,23 @@ const RecipeDetails = () => {
       </Container>
     );
 
+  if (!recipe)
+    return (
+      <Container>
+        <Text>No recipe found..</Text>
+      </Container>
+    );
+
   return (
     <Container>
-      {recipe ? <RecipeCard isDetail recipe={recipe} /> : null}
+      <IconButton
+        aria-label="Return to home page"
+        onClick={() => route.push('/')}
+        icon={<ArrowBackIcon />}
+        size="lg"
+        mb={4}
+      />
+      <RecipeCard isDetail recipe={recipe} />
     </Container>
   );
 };

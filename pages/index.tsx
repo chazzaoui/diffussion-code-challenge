@@ -1,4 +1,10 @@
-import { Button, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
+import {
+  Button,
+  SimpleGrid,
+  Spinner,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -9,11 +15,12 @@ import Container from '@/components/container';
 
 export default function Home() {
   const route = useRouter();
-  const [error, setError] = useState<string | null>(null);
   const [isRecipeAmountLoading, setIsRecipeAmountLoading] =
     useState<boolean>(true);
   const [recipesAmount, setRecipeAmount] = useState('');
   const { recipes, isRecipesLoading } = useContext(RecipeContext);
+  const toast = useToast();
+
   useEffect(() => {
     fetch(
       'https://master-7rqtwti-yj2le3kr2yhmu.uk-1.platformsh.site/yumazoo/recipes/number',
@@ -36,7 +43,13 @@ export default function Home() {
           'There was a problem with the fetch operation:',
           error
         );
-        setError(error.message);
+        toast({
+          title: 'Error :(',
+          description: error.message,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
         setIsRecipeAmountLoading(false);
       });
   }, []);
@@ -47,7 +60,7 @@ export default function Home() {
         <Spinner />
       </Container>
     );
-  console.log(recipes);
+
   return (
     <Container>
       <SearchBar />

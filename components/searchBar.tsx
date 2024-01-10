@@ -8,9 +8,10 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
+import { useRouter } from 'next/router';
+
 import { Recipe } from '@/types';
 import { RecipeContext } from '@/providers/getRecipeProvider';
-import { useRouter } from 'next/router';
 
 const SearchBar = () => {
   const { recipes } = useContext(RecipeContext);

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   FormErrorMessage,
@@ -17,7 +18,6 @@ import { useRouter } from 'next/router';
 
 import Container from '@/components/container';
 import { Recipe } from '@/types';
-import { useState } from 'react';
 
 export default function CreateRecipe() {
   const {
@@ -30,45 +30,46 @@ export default function CreateRecipe() {
   const route = useRouter();
   const [isPosting, setIsPosting] = useState(false);
 
-  const onSubmit: SubmitHandler<Recipe> = async (values) => {
+  const onSubmit: SubmitHandler<Recipe> = (values) => {
     setIsPosting(true);
-    try {
-      console.log(JSON.stringify(values));
-      const response = await fetch(
-        'https://master-7rqtwti-yj2le3kr2yhmu.uk-1.platformsh.site/yumazoo/recipes',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(values),
-        }
-      );
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+    fetch(
+      'https://master-7rqtwti-yj2le3kr2yhmu.uk-1.platformsh.site/yumazoo/recipes',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
       }
-      setIsPosting(false);
-      toast({
-        title: 'Recipe created! :)',
-        description: 'Succesfully created ya recipe fam',
-        status: 'success',
-        duration: 6000,
-        isClosable: true,
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+      })
+      .then(() => {
+        setIsPosting(false);
+        toast({
+          title: 'Recipe created! :)',
+          description: 'Successfully created ya recipe fam',
+          status: 'success',
+          duration: 6000,
+          isClosable: true,
+        });
+        reset();
+      })
+      .catch((error) => {
+        setIsPosting(false);
+        console.error('Failed to submit recipe', error);
+        toast({
+          title: 'Error :(',
+          description: error.message,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
       });
-      reset();
-    } catch (error) {
-      setIsPosting(false);
-
-      console.error('Failed to submit recipe', error);
-      toast({
-        title: 'Error :(',
-        description: 'Something went wrong',
-        status: 'error',
-        duration: 6000,
-        isClosable: true,
-      });
-    }
   };
 
   return (

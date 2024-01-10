@@ -1,15 +1,14 @@
 import React from 'react';
 import {
   Box,
-  Heading,
   Text,
   Flex,
   Tag,
-  Stack,
   Badge,
   GridItem,
   HStack,
 } from '@chakra-ui/react';
+
 import { Recipe } from '@/types';
 
 const RecipeCard: React.FC<{
@@ -17,17 +16,18 @@ const RecipeCard: React.FC<{
   isDetail?: boolean;
 }> = ({ recipe, isDetail }) => {
   const difficultyLevel =
-    ['Easy', 'Medium', 'Hard', 'Expert'][recipe.difficulty - 1] ||
-    'Unknown';
+    ['Easy', 'Medium', 'Hard', 'Expert', 'Hardcore'][
+      recipe.difficulty - 1
+    ] || 'God';
 
   return (
-    <GridItem w={isDetail ? '100%' : undefined}>
+    <GridItem>
       <Box
-        maxW="sm"
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
         bg="white"
+        w={isDetail ? ['100%'] : undefined}
       >
         <Box p="6">
           <Box display="flex" alignItems="baseline">

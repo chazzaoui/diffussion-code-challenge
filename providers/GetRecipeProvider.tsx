@@ -1,5 +1,7 @@
-import { Recipe } from '@/types';
+import { useToast } from '@chakra-ui/react';
 import { useState, useEffect, createContext, ReactNode } from 'react';
+
+import { Recipe } from '@/types';
 
 type RecipeContextType = {
   isRecipesLoading: boolean;
@@ -21,7 +23,7 @@ export const RecipeProvider: React.FC<ContainerProps> = ({
   const [isRecipesLoading, setIsRecipesLoading] =
     useState<boolean>(false);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
 
   const fetchRecipes = () => {
     setIsRecipesLoading(true);
@@ -46,7 +48,13 @@ export const RecipeProvider: React.FC<ContainerProps> = ({
           'There was a problem with the fetch operation:',
           error
         );
-        setError(error.message);
+        toast({
+          title: 'Error :(',
+          description: error.message,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
         setIsRecipesLoading(false);
       });
   };
