@@ -12,8 +12,6 @@ import { Recipe } from '@/types';
 import { RecipeContext } from '@/providers/getRecipeProvider';
 import { useRouter } from 'next/router';
 
-// Mock data array
-
 const SearchBar = () => {
   const { recipes } = useContext(RecipeContext);
   const route = useRouter();
@@ -32,7 +30,7 @@ const SearchBar = () => {
       const filtered = recipes.filter((recipe) =>
         recipe.name.toLowerCase().includes(value.toLowerCase())
       );
-      setFilteredRecipes(filtered.slice(0, 3)); // Take the first 3 matches
+      setFilteredRecipes(filtered.slice(0, 3));
     } else {
       setFilteredRecipes([]);
     }

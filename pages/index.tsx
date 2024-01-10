@@ -1,17 +1,11 @@
-import {
-  Button,
-  Container,
-  Flex,
-  SimpleGrid,
-  Spinner,
-  Text,
-} from '@chakra-ui/react';
+import { Button, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import SearchBar from '@/components/searchBar';
 import RecipeCard from '@/components/recipeCard';
 import { RecipeContext } from '@/providers/getRecipeProvider';
+import Container from '@/components/container';
 
 export default function Home() {
   const route = useRouter();
@@ -53,7 +47,7 @@ export default function Home() {
         <Spinner />
       </Container>
     );
-
+  console.log(recipes);
   return (
     <Container>
       <SearchBar />

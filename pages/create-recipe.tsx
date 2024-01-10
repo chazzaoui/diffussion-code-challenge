@@ -9,22 +9,30 @@ import {
   Button,
   Flex,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
-import { Recipe } from '@/types';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
+
+import Container from '@/components/container';
+import { Recipe } from '@/types';
+import { useState } from 'react';
 
 export default function CreateRecipe() {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
+    reset,
   } = useForm<Recipe>();
-
+  const toast = useToast();
   const route = useRouter();
+  const [isPosting, setIsPosting] = useState(false);
 
   const onSubmit: SubmitHandler<Recipe> = async (values) => {
+    setIsPosting(true);
     try {
+      console.log(JSON.stringify(values));
       const response = await fetch(
         'https://master-7rqtwti-yj2le3kr2yhmu.uk-1.platformsh.site/yumazoo/recipes',
         {
@@ -39,18 +47,31 @@ export default function CreateRecipe() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-
-      const data = await response.json();
-      console.log(data);
-      alert('Recipe created successfully');
+      setIsPosting(false);
+      toast({
+        title: 'Recipe created! :)',
+        description: 'Succesfully created ya recipe fam',
+        status: 'success',
+        duration: 6000,
+        isClosable: true,
+      });
+      reset();
     } catch (error) {
+      setIsPosting(false);
+
       console.error('Failed to submit recipe', error);
-      alert('Failed to submit recipe');
+      toast({
+        title: 'Error :(',
+        description: 'Something went wrong',
+        status: 'error',
+        duration: 6000,
+        isClosable: true,
+      });
     }
   };
 
   return (
-    <Flex flexDir={'column'} padding={4}>
+    <Container>
       <IconButton
         aria-label="Return to home page"
         onClick={() => route.push('/')}
@@ -64,6 +85,7 @@ export default function CreateRecipe() {
           <Input
             id="name"
             placeholder="Enter recipe name"
+            maxLength={40}
             {...register('name', { required: 'Name is required' })}
           />
           <FormErrorMessage>
@@ -76,6 +98,7 @@ export default function CreateRecipe() {
           <Input
             id="origin"
             placeholder="Enter recipe origin"
+            maxLength={2}
             {...register('origin', {
               required: 'Origin is required',
             })}
@@ -90,6 +113,7 @@ export default function CreateRecipe() {
           <Input
             id="description"
             placeholder="Enter recipe description"
+            maxLength={250}
             {...register('description', {
               required: 'Description is required',
             })}
@@ -122,6 +146,7 @@ export default function CreateRecipe() {
           <Input
             id="protein"
             placeholder="Enter protein used"
+            maxLength={15}
             {...register('protein', {
               required: 'Protein is required',
             })}
@@ -136,6 +161,7 @@ export default function CreateRecipe() {
           <Input
             id="produce"
             placeholder="Enter produce used"
+            maxLength={15}
             {...register('produce', {
               required: 'produce is required',
             })}
@@ -149,6 +175,7 @@ export default function CreateRecipe() {
           <Input
             id="spice"
             placeholder="Enter spice used"
+            maxLength={15}
             {...register('spice', {
               required: 'spice is required',
             })}
@@ -160,8 +187,9 @@ export default function CreateRecipe() {
         <FormControl isInvalid={!!errors.cookingOil}>
           <FormLabel htmlFor="cookingOil">Cooking Oil</FormLabel>
           <Input
-            id="coockingOil"
+            id="cookingOil"
             placeholder="Enter cookingOil used"
+            maxLength={15}
             {...register('cookingOil', {
               required: 'cookingOil is required',
             })}
@@ -203,6 +231,7 @@ export default function CreateRecipe() {
           <Input
             id="authenticity"
             placeholder="Enter authenticity used"
+            maxLength={15}
             {...register('authenticity', {
               required: 'authenticity is required',
             })}
@@ -216,6 +245,7 @@ export default function CreateRecipe() {
           <Input
             id="stock"
             placeholder="Enter stock used"
+            maxLength={15}
             {...register('stock', {
               required: 'stock is required',
             })}
@@ -228,12 +258,13 @@ export default function CreateRecipe() {
         <Button
           mt={4}
           colorScheme="teal"
-          isLoading={isSubmitting}
+          isLoading={isSubmitting || isPosting}
           type="submit"
+          disabled={!isValid}
         >
           Submit
         </Button>
       </form>
-    </Flex>
+    </Container>
   );
 }

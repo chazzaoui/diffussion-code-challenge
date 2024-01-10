@@ -1,9 +1,10 @@
-import Container from '@/components/container';
-import RecipeCard from '@/components/recipeCard';
-import { Recipe } from '@/types';
 import { Flex, Spinner } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+
+import Container from '@/components/container';
+import RecipeCard from '@/components/recipeCard';
+import { Recipe } from '@/types';
 
 const RecipeDetails = () => {
   const router = useRouter();
