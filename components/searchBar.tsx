@@ -11,7 +11,7 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 
 import { Recipe } from '@/types';
-import { RecipeContext } from '@/providers/getRecipeProvider';
+import { RecipeContext } from '@/providers/RecipeProvider';
 
 const SearchBar = () => {
   const { recipes } = useContext(RecipeContext);

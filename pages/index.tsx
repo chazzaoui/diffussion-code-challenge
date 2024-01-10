@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 import SearchBar from '@/components/searchBar';
 import RecipeCard from '@/components/recipeCard';
-import { RecipeContext } from '@/providers/getRecipeProvider';
+import { RecipeContext } from '@/providers/RecipeProvider';
 import Container from '@/components/container';
 
 export default function Home() {

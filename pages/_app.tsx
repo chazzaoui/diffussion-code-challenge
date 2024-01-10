@@ -1,4 +1,4 @@
-import { RecipeProvider } from '@/providers/getRecipeProvider';
+import { RecipeProvider } from '@/providers/RecipeProvider';
 import '@/styles/globals.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
