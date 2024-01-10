@@ -10,6 +10,7 @@ import {
   Flex,
   IconButton,
   useToast,
+  Heading,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
@@ -72,13 +73,15 @@ export default function CreateRecipe() {
 
   return (
     <Container>
-      <IconButton
-        aria-label="Return to home page"
-        onClick={() => route.push('/')}
-        width={24}
-      >
-        <ArrowBackIcon />
-      </IconButton>
+      <Flex justify="space-between" align="center" gap={4} mb="8">
+        <IconButton
+          aria-label="Return to home page"
+          onClick={() => route.push('/')}
+          icon={<ArrowBackIcon />}
+          size="lg"
+        />
+        <Heading>Create Recipe</Heading>
+      </Flex>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!errors.name}>
           <FormLabel htmlFor="name">Name</FormLabel>

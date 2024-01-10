@@ -11,4 +11,5 @@ export type Recipe = {
   serves: number;
   authenticity: string;
   stock: string;
+  index?: number;
 };

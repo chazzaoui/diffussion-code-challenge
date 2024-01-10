@@ -12,13 +12,16 @@ import {
 } from '@chakra-ui/react';
 import { Recipe } from '@/types';
 
-const RecipeCard: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
+const RecipeCard: React.FC<{
+  recipe: Recipe;
+  isDetail?: boolean;
+}> = ({ recipe, isDetail }) => {
   const difficultyLevel =
     ['Easy', 'Medium', 'Hard', 'Expert'][recipe.difficulty - 1] ||
     'Unknown';
 
   return (
-    <GridItem>
+    <GridItem w={isDetail ? '100%' : undefined}>
       <Box
         maxW="sm"
         borderWidth="1px"

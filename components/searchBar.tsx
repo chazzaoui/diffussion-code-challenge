@@ -27,7 +27,13 @@ const SearchBar = () => {
     setSearchTerm(value);
 
     if (value.length > 1) {
-      const filtered = recipes.filter((recipe) =>
+      // this mapping fixes the original indexes being messed up
+      // it makes sure that I call recipe/number endpoint with right item index
+      const indexedRecipes = recipes.map((recipe, index) => ({
+        index,
+        ...recipe,
+      }));
+      const filtered = indexedRecipes.filter((recipe) =>
         recipe.name.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredRecipes(filtered.slice(0, 3));
@@ -50,10 +56,10 @@ const SearchBar = () => {
       </InputGroup>
       {filteredRecipes.length > 0 && (
         <VStack align="stretch">
-          {filteredRecipes.map((recipe, index) => (
+          {filteredRecipes.map((recipe) => (
             <Box
-              onClick={() => route.push(`/recipe/${index}`)}
-              key={recipe.name}
+              onClick={() => route.push(`/recipe/${recipe.index}`)}
+              key={recipe.name + recipe.index}
               p={2}
               shadow="md"
             >

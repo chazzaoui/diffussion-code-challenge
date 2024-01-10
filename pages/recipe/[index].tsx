@@ -1,4 +1,4 @@
-import { Flex, Spinner } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -50,7 +50,7 @@ const RecipeDetails = () => {
 
   return (
     <Container>
-      {recipe ? <RecipeCard recipe={recipe} /> : null}
+      {recipe ? <RecipeCard isDetail recipe={recipe} /> : null}
     </Container>
   );
 };
