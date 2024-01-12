@@ -26,6 +26,8 @@ export default function Home() {
   const runningAsExtension = isChromeExtension();
 
   useEffect(() => {
+    // would normally abstract the endpoint to an env, so that whenever it changes you can just update it their
+    // or swicth between different environments with different endpoints
     fetch(
       'https://master-7rqtwti-yj2le3kr2yhmu.uk-1.platformsh.site/yumazoo/recipes/number',
       {
@@ -68,6 +70,8 @@ export default function Home() {
   return (
     <Container>
       <SearchBar />
+      {/* For sake of the challenge handled this button like this, but would never do this in production */}
+      {/* Would probably just have a different type of page for this */}
       {runningAsExtension ? (
         <Button
           mb={8}

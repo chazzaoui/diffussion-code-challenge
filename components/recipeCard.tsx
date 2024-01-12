@@ -7,6 +7,8 @@ import {
   Badge,
   GridItem,
   HStack,
+  VStack,
+  Stack,
 } from '@chakra-ui/react';
 
 import { Recipe } from '@/types';
@@ -21,26 +23,18 @@ const RecipeCard: React.FC<{
     ] || 'God';
 
   return (
-    <GridItem>
+    <GridItem w={isDetail ? ['100%', '80%', '50%'] : undefined}>
       <Box
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
         bg="white"
-        w={isDetail ? ['100%'] : undefined}
       >
         <Box p="6">
-          <Box display="flex" alignItems="baseline">
-            <Badge borderRadius="full" px="2" colorScheme="teal">
-              {recipe.name}
-            </Badge>
-          </Box>
-
-          <Flex
-            mt="1"
-            justifyContent="space-between"
-            alignContent="center"
-          >
+          <Badge mb={4} borderRadius="full" px="2" colorScheme="teal">
+            {recipe.origin}
+          </Badge>
+          <Box borderRadius={4} p={4} backgroundColor={'#B2F5EA'}>
             <Box
               fontSize="xl"
               fontWeight="semibold"
@@ -50,60 +44,53 @@ const RecipeCard: React.FC<{
             >
               {recipe.name}
             </Box>
-            <Tag size="sm" colorScheme="teal" borderRadius="full">
-              {difficultyLevel[0]}
-            </Tag>
-          </Flex>
 
-          <Flex mt="2" alignItems="center">
-            <Box fontSize="sm" color="gray.600">
-              Difficulty: {difficultyLevel}
-            </Box>
-          </Flex>
-
-          <Text mt="2">{recipe.description}</Text>
+            <Flex mt="2" alignItems="center">
+              <Box fontSize="sm" color="gray.600">
+                Difficulty: {difficultyLevel}
+              </Box>
+            </Flex>
+            <Text mt="2">{recipe.description}</Text>
+          </Box>
         </Box>
+        <HStack justify={'space-between'} p="6" bg="gray.50">
+          <VStack alignItems={'start'}>
+            <Box>
+              <Text fontWeight="bold">Protein</Text>
+              <Text fontSize="sm">{recipe.protein}</Text>
+            </Box>
+            <Box>
+              <Text fontWeight="bold">Spices</Text>
+              <Text fontSize="sm">{recipe.spice}</Text>
+            </Box>
+            <Box>
+              <Text fontWeight="bold">Volume/Weight</Text>
+              <Text fontSize="sm">{recipe.volume}g</Text>
+            </Box>
+            <Box>
+              <Text fontWeight="bold">Authenticity</Text>
+              <Text fontSize="sm">{recipe.authenticity}</Text>
+            </Box>
+          </VStack>
+          <VStack alignItems={'start'}>
+            <Box>
+              <Text fontWeight="bold">Spice Level</Text>
+              <Text fontSize="sm">{recipe.spice}</Text>
+            </Box>
+            <Box>
+              <Text fontWeight="bold">Cooking Oil</Text>
+              <Text fontSize="sm">{recipe.cookingOil}</Text>
+            </Box>
+            <Box>
+              <Text fontWeight="bold">Serves</Text>
+              <Text fontSize="sm">{recipe.serves}</Text>
+            </Box>
 
-        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
-          <Box>
-            <Text fontWeight="bold">Protein</Text>
-            <Text fontSize="sm">{recipe.protein}</Text>
-          </Box>
-          <Box>
-            <Text fontWeight="bold">Spice Level</Text>
-            <Text fontSize="sm">{recipe.spice}</Text>
-          </Box>
-        </HStack>
-        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
-          <Box>
-            <Text fontWeight="bold">Spices</Text>
-            <Text fontSize="sm">{recipe.spice}</Text>
-          </Box>
-          <Box>
-            <Text fontWeight="bold">Cooking Oil</Text>
-            <Text fontSize="sm">{recipe.cookingOil}</Text>
-          </Box>
-        </HStack>
-        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
-          <Box>
-            <Text fontWeight="bold">Volume/Weight</Text>
-            <Text fontSize="sm">{recipe.volume}g</Text>
-          </Box>
-          <Box>
-            <Text fontWeight="bold">Serves</Text>
-            <Text fontSize="sm">{recipe.serves}</Text>
-          </Box>
-        </HStack>
-        <HStack mt="3" justify={'space-between'} p="6" bg="gray.50">
-          <Box>
-            <Text fontWeight="bold">Authenticity</Text>
-            <Text fontSize="sm">{recipe.authenticity}</Text>
-          </Box>
-
-          <Box>
-            <Text fontWeight="bold">Stock</Text>
-            <Text fontSize="sm">{recipe.stock}</Text>
-          </Box>
+            <Box>
+              <Text fontWeight="bold">Stock</Text>
+              <Text fontSize="sm">{recipe.stock}</Text>
+            </Box>
+          </VStack>
         </HStack>
       </Box>
     </GridItem>
